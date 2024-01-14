@@ -1,3 +1,6 @@
+#define NO_USB
+#define Serial _UART1_
+
 #ifdef delay
 #undef delay
 #endif
@@ -11,7 +14,7 @@ void qemu_delay(uint32_t time_ms) {
 }
 
 const int outPin = 5;
-const int stepDelay = 50;
+const int stepDelay = 500;
 const int halfPeriodStepCnt = 10;
 const int resolution = 1 << 8;
 int stepCnt;
@@ -19,6 +22,7 @@ int stepCnt;
 #define PI 3.1415926535897932384626433832795
 
 void setup() {
+    Serial.begin(9600);
     stepCnt = 0;
 }
 
@@ -27,7 +31,8 @@ void loop() {
     float value = 1 + sin(angle);
     int analogValue = (value / 2) * resolution;
     analogWrite(outPin, analogValue);
+    Serial.println(analogValue);
 
     stepCnt += 1;
-    delay(outPin);
+    delay(stepDelay);
 }
