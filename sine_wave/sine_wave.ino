@@ -14,7 +14,7 @@ void qemu_delay(uint32_t time_ms) {
 }
 
 const int outPin = 5;
-const int stepDelay = 500;
+const int stepDelay = 100;
 const int halfPeriodStepCnt = 10;
 const int resolution = 1 << 8;
 int stepCnt;
