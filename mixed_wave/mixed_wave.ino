@@ -34,6 +34,8 @@ void loop() {
     float angle = (stepCnt / (float)halfPeriodStepCnt) * PI;
     float value = 1 + sin(angle);
     int analogValue = (value / 2) * resolution;
+    if (analogValue > resolution - 1)
+	analogValue = resolution - 1;
     analogWrite(outPin, analogValue);
     Serial.println(analogValue);
 
