@@ -39,12 +39,14 @@ void loop() {
     analogWrite(outPin, analogValue);
     Serial.println(analogValue);
 
-    digitalWrite(digPin, digVal);
-    delay(stepDelay / 2);
-    digVal = !digVal;
-    digitalWrite(digPin, digVal);
+    if (stepCnt % halfPeriodStepCnt == halfPeriodStepCnt / 2) {
+	digVal = !digVal;
+	digitalWrite(digPin, digVal);
+    } else if (stepCnt % halfPeriodStepCnt == 0) {
+	digVal = !digVal;
+	digitalWrite(digPin, digVal);
+    }
 
-    digVal = !digVal;
     stepCnt += 1;
-    delay(stepDelay / 2);
+    delay(stepDelay);
 }
